@@ -3,6 +3,9 @@ package main
 import (
 "net/http"
 "github.com/gin-gonic/gin"
+"encoding/json"
+"fmt"
+
 )
 type STKPushRequest struct {
 	TargetNumber int `json:"targetNumber"`
@@ -35,6 +38,20 @@ func main() {
 		})
 	})
 
+	r.POST("/stkcallback/:param", func(c *gin.Context) {
+        param := c.Param("param")
+		 // Create a map to store the data
+		 var data map[string]interface{}
+
+		 // Unmarshal the JSON response into the map
+		 if err := json.Unmarshal([]byte(param), &data); err != nil {
+			fmt.Println(err)
+		 }
+	 
+		 // Print the map
+		 fmt.Printf("%+v\n", data)
+	
+	})
 	// Start the server
 	r.Run()
 }
