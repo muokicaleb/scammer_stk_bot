@@ -11,22 +11,6 @@ type STKPushRequest struct {
 	TargetNumber int    `json:"targetNumber"`
 	RequestID    string `json:"requestID"`
 }
-type STKCallback struct {
-	Body struct {
-		STKCallback struct {
-			CallbackMetadata struct {
-				Item []struct {
-					Name  string `json:"Name"`
-					Value string `json:"Value"`
-				} `json:"Item"`
-			} `json:"CallbackMetadata"`
-			CheckoutRequestID string `json:"CheckoutRequestID"`
-			MerchantRequestID string `json:"MerchantRequestID"`
-			ResultCode        int    `json:"ResultCode"`
-			ResultDesc        string `json:"ResultDesc"`
-		} `json:"stkCallback"`
-	} `json:"Body"`
-}
 
 func main() {
 
