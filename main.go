@@ -35,7 +35,7 @@ func main() {
 
 		// Return a message to the client indicating that the request has been processed
 		c.JSON(http.StatusOK, gin.H{
-			"message": "done",
+			"message": "stk push sent",
 		})
 	})
 
