@@ -9,19 +9,6 @@ import (
 	"os"
 )
 
-type StkPushData struct {
-	BusinessShortCode int    `json:"BusinessShortCode"`
-	Password          string `json:"Password"`
-	Timestamp         string `json:"Timestamp"`
-	TransactionType   string `json:"TransactionType"`
-	Amount            int    `json:"Amount"`
-	PartyA            int    `json:"PartyA"`
-	PartyB            int    `json:"PartyB"`
-	PhoneNumber       int    `json:"PhoneNumber"`
-	CallBackURL       string `json:"CallBackURL"`
-	AccountReference  string `json:"AccountReference"`
-	TransactionDesc   string `json:"TransactionDesc"`
-}
 
 func ScammerStkPush(bearerToken string, targetNumber int, requestID string, pushAmount int) {
 
