@@ -10,6 +10,7 @@ import (
 type STKPushRequest struct {
 	TargetNumber int    `json:"targetNumber"`
 	RequestID    string `json:"requestID"`
+	PushAmount   int    `json:"pushAmount"`
 }
 
 func main() {
@@ -30,7 +31,7 @@ func main() {
 		}
 
 		// Call the bot function with the TargetNumber and RequestID from the request
-		bot(req.TargetNumber, req.RequestID)
+		bot(req.TargetNumber, req.RequestID, req.PushAmount)
 
 		// Return a message to the client indicating that the request has been processed
 		c.JSON(http.StatusOK, gin.H{
@@ -53,7 +54,7 @@ func main() {
 			return
 		}
 		str := fmt.Sprintf("%+v", data)
-        fmt.Println(str)
+		fmt.Println(str)
 
 	})
 	// Start the server
@@ -61,7 +62,7 @@ func main() {
 }
 
 // bot is a function that handles STK push requests
-func bot(targetNumber int, requestID string) {
+func bot(targetNumber int, requestID string, pushAmount int) {
 	// Get a Daraja Bearer token
-	ScammerStkPush(BearerTokenGenerator(), targetNumber, requestID)
+	ScammerStkPush(BearerTokenGenerator(), targetNumber, requestID, pushAmount)
 }

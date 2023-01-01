@@ -23,7 +23,7 @@ type StkPushData struct {
 	TransactionDesc   string `json:"TransactionDesc"`
 }
 
-func ScammerStkPush(bearerToken string, targetNumber int, requestID string) {
+func ScammerStkPush(bearerToken string, targetNumber int, requestID string, pushAmount int) {
 
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 	method := "POST"
@@ -36,7 +36,7 @@ func ScammerStkPush(bearerToken string, targetNumber int, requestID string) {
 		"Password":          requestPass,
 		"Timestamp":         timeStamp,
 		"TransactionType":   "CustomerPayBillOnline",
-		"Amount":            1,
+		"Amount":            pushAmount,
 		"PartyA":            targetNumber,
 		"PartyB":            os.Getenv("BUSINESS_SHORT_CODE"),
 		"PhoneNumber":       targetNumber,
