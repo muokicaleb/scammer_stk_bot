@@ -69,7 +69,7 @@ func main() {
 			return
 		}
 
-		fmt.Println(data)
+		fmt.Printf("%+v\n", callbackData.Body)
 
 	})
 	// Start the server
