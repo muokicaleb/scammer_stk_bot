@@ -9,7 +9,6 @@ import (
 	"os"
 )
 
-
 func ScammerStkPush(bearerToken string, targetNumber int, requestID string, pushAmount int) {
 
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"

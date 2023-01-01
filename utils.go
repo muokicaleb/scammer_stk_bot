@@ -67,7 +67,6 @@ func GetTimeStamp() string {
 
 	// Format the time using the layout "YYYYMMDDHHmmss"
 	formattedTime := now.Format("20060102150405")
-	fmt.Println(formattedTime)
 
 	return formattedTime
 }
