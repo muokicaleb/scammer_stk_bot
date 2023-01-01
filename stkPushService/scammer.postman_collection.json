@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "cde18cbd-bf34-422f-8127-39a43c94cd73",
+		"name": "scammer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8198248"
+	},
+	"item": [
+		{
+			"name": "MakeStkPush",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"targetNumber\": 254724585995,\n    \"requestID\": \"8c9eb26b-1388-4f88-9556-ecde4f2f97b2\",\n    \"pushAmount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://172.105.50.35:8080/pushstk ",
+					"protocol": "http",
+					"host": [
+						"172",
+						"105",
+						"50",
+						"35"
+					],
+					"port": "8080",
+					"path": [
+						"pushstk "
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

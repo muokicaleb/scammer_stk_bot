@@ -1,4 +1,4 @@
-module github.com/muokicaleb/scammer_stk_bot
+module github.com/muokicaleb/scammer_stk_bot/stkPushService
 
 go 1.19
 
