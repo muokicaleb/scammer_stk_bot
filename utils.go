@@ -31,8 +31,6 @@ func BearerTokenGenerator() string {
 	}
 	tokenVal := fmt.Sprintf("%s:%s", os.Getenv("SAFARICOM_CONSUMER_KEY"), os.Getenv("SAFARICOM_CONSUMER_SECRET"))
 	tokenValb64 := base64.StdEncoding.EncodeToString([]byte(tokenVal))
-	fmt.Println(os.Getenv("SAFARICOM_CONSUMER_KEY"))
-	fmt.Println(tokenValb64)
 
 	req.Header.Add("Authorization", "Basic "+tokenValb64)
 

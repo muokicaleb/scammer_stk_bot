@@ -1,19 +1,17 @@
 package main
 
 import (
-"net/http"
-"github.com/gin-gonic/gin"
-"encoding/json"
-"fmt"
-
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
+
 type STKPushRequest struct {
-	TargetNumber int `json:"targetNumber"`
-	RequestID string `json:"requestID"`
+	TargetNumber int    `json:"targetNumber"`
+	RequestID    string `json:"requestID"`
 }
 
 func main() {
-
 
 	// Create a new Gin router
 	r := gin.New()
@@ -29,7 +27,6 @@ func main() {
 			return
 		}
 
-		
 		bot(req.TargetNumber, req.RequestID)
 
 		// Return the BMI to the client
@@ -39,26 +36,21 @@ func main() {
 	})
 
 	r.POST("/stkcallback/:param", func(c *gin.Context) {
-        param := c.Param("param")
-		 // Create a map to store the data
-		 var data map[string]interface{}
+		param := c.Param("param")
+		fmt.Println(param)
+		var data map[string]interface{}
+		// Parse and validate the request body as JSON
+		if err := c.ShouldBindJSON(&data); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
 
-		 // Unmarshal the JSON response into the map
-		 if err := json.Unmarshal([]byte(param), &data); err != nil {
-			fmt.Println(err)
-		 }
-	 
-		 // Print the map
-		 fmt.Printf("%+v\n", data)
-	
+		fmt.Println(data)
+
 	})
 	// Start the server
 	r.Run()
 }
-
-
-
-
 
 func bot(targetNumber int, requestID string) {
 	// get daraja brear token.

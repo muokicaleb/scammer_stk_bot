@@ -24,7 +24,6 @@ type StkPushData struct {
 }
 
 func ScammerStkPush(bearerToken string, targetNumber int, requestID string) {
-	
 
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 	method := "POST"
@@ -44,7 +43,7 @@ func ScammerStkPush(bearerToken string, targetNumber int, requestID string) {
 		"CallBackURL":       CallBackURL,
 		"AccountReference":  "NotBob",
 		"TransactionDesc":   "Payment of scamming"})
-		
+
 	payload := bytes.NewBuffer(postBody)
 
 	client := &http.Client{}
