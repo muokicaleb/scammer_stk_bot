@@ -14,8 +14,7 @@ ENV TZ=Africa/Nairobi
 
 WORKDIR /
 
-COPY --from=builder /app ./
-COPY  --from=builder /.env ./.env
+COPY --from=builder /app /.env ./
 
 EXPOSE 8080
 
