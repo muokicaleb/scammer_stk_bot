@@ -59,17 +59,17 @@ func main() {
 		// Extract the "param" path parameter from the request
 		param := c.Param("param")
 		fmt.Println(param)
-		// var data map[string]interface{}
-		// // Parse and validate the request body as JSON
-		// if err := c.ShouldBindJSON(&data); err != nil {
-		var callbackData STKCallback
-		if err := c.ShouldBindJSON(&callbackData); err != nil {
+		var data map[string]interface{}
+
+		// Parse and validate the request body as JSON
+
+		if err := c.ShouldBindJSON(&data); err != nil {
 			// If the request body is invalid, return a Bad Request error
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-
-		fmt.Printf("%+v\n", callbackData.Body)
+		str := fmt.Sprintf("%+v", data)
+        fmt.Println(str)
 
 	})
 	// Start the server
