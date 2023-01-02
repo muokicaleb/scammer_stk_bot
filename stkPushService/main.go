@@ -34,6 +34,8 @@ func main() {
 		// Call the bot function with the TargetNumber and RequestID from the request
 		pushResponse := bot(req.TargetNumber, req.RequestID, req.PushAmount)
 
+		AddResponseToStkDB(pushResponse, req.RequestID, req.PushAmount)
+
 		// Return a message to the client indicating that the request has been processed
 		c.JSON(http.StatusOK, pushResponse)
 	})
@@ -42,7 +44,7 @@ func main() {
 	r.POST("/stkcallback/:param", func(c *gin.Context) {
 		// Extract the "param" path parameter from the request
 		param := c.Param("param")
-		fmt.Println(param)
+
 		var data map[string]interface{}
 
 		// Parse and validate the request body as JSON
@@ -58,7 +60,14 @@ func main() {
 			return
 		}
 
-		fmt.Println(string(responseData))
+		callbackBody, err := JsonStringToMap(string(responseData))
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		UpdateStkPushDB(callbackBody, param)
+		fmt.Println("Done callBackbody")
 
 	})
 	// Start the server
