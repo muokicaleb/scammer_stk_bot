@@ -71,6 +71,16 @@ func main() {
 		fmt.Println("Done callBackbody")
 
 	})
+
+	r.GET("/transactionstatus/:id", func(c *gin.Context) {
+		param := c.Param("param")
+
+		// Return the value to the client
+		c.JSON(200, gin.H{
+			"status": GetTransactionStatus(param),
+		})
+
+	})
 	// Start the server
 	r.Run()
 }

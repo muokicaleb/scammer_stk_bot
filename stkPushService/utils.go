@@ -1,16 +1,16 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
-	"database/sql"
-	_ "github.com/lib/pq"
 )
 
 type TokenData struct {
@@ -90,18 +90,17 @@ func JsonStringToMap(jsonString string) (map[string]interface{}, error) {
 
 	return data, err
 
-
 }
 
-func ConnectToPSQL() *sql.DB{
+func ConnectToPSQL() *sql.DB {
 
-		// Set the values for the connection string
-		user := os.Getenv("POSTGRES_USER")
-		password := os.Getenv("POSTGRES_PASSWORD")
-		dbname := os.Getenv("POSTGRES_DB")
-		dburl := os.Getenv("POSTGRES_URL")
-		sslmode := "disable"
-	
+	// Set the values for the connection string
+	user := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+	dburl := os.Getenv("POSTGRES_URL")
+	sslmode := "disable"
+
 	connStr := fmt.Sprintf("user=%s password=%s host=%s port=5432 dbname=%s sslmode=%s", user, password, dburl, dbname, sslmode)
 
 	// Connect to the database
@@ -109,7 +108,7 @@ func ConnectToPSQL() *sql.DB{
 	if err != nil {
 		// handle the error
 	}
-	
+
 	// Create the table
 	tableStmt := fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %s (
@@ -121,7 +120,7 @@ func ConnectToPSQL() *sql.DB{
 	_, err = db.Exec(tableStmt)
 	if err != nil {
 		fmt.Println(err)
-		
+
 	}
 
 	fmt.Println("Table successfully created.")
