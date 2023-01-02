@@ -72,7 +72,7 @@ func main() {
 
 	})
 
-	r.GET("/transactionstatus/:id", func(c *gin.Context) {
+	r.GET("/transactionstatus/:param", func(c *gin.Context) {
 		param := c.Param("param")
 
 		// Return the value to the client
