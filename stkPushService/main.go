@@ -32,12 +32,10 @@ func main() {
 		}
 
 		// Call the bot function with the TargetNumber and RequestID from the request
-		bot(req.TargetNumber, req.RequestID, req.PushAmount)
+		pushResponse := bot(req.TargetNumber, req.RequestID, req.PushAmount)
 
 		// Return a message to the client indicating that the request has been processed
-		c.JSON(http.StatusOK, gin.H{
-			"message": "stk push sent",
-		})
+		c.JSON(http.StatusOK, pushResponse)
 	})
 
 	// Define a route for handling callbacks from the STK API
@@ -48,22 +46,19 @@ func main() {
 		var data map[string]interface{}
 
 		// Parse and validate the request body as JSON
-
 		if err := c.ShouldBindJSON(&data); err != nil {
 			// If the request body is invalid, return a Bad Request error
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		str := fmt.Sprintf("%+v", data)
-		fmt.Println(str)
 
-		b, err := json.Marshal(data)
+		responseData, err := json.Marshal(data)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		fmt.Println(string(b))
+		fmt.Println(string(responseData))
 
 	})
 	// Start the server
@@ -71,7 +66,7 @@ func main() {
 }
 
 // bot is a function that handles STK push requests
-func bot(targetNumber int, requestID string, pushAmount int) {
+func bot(targetNumber int, requestID string, pushAmount int) map[string]interface{} {
 	// Get a Daraja Bearer token
-	ScammerStkPush(BearerTokenGenerator(), targetNumber, requestID, pushAmount)
+	return ScammerStkPush(BearerTokenGenerator(), targetNumber, requestID, pushAmount)
 }

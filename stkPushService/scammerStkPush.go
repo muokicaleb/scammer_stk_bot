@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func ScammerStkPush(bearerToken string, targetNumber int, requestID string, pushAmount int) {
+func ScammerStkPush(bearerToken string, targetNumber int, requestID string, pushAmount int) map[string]interface{} {
 
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 	method := "POST"
@@ -45,9 +45,19 @@ func ScammerStkPush(bearerToken string, targetNumber int, requestID string, push
 	res, err := client.Do(req)
 	if err != nil {
 		fmt.Println(err)
-		return
+
 	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
-	fmt.Println(string(body))
+
+	respBody, err := JsonStringToMap(string(body))
+
+	if err != nil {
+		fmt.Println(err)
+
+	}
+	return respBody
+
+
+
 }

@@ -76,3 +76,17 @@ func GetReqPass(timeStamp string) string {
 	return base64.StdEncoding.EncodeToString([]byte(val))
 
 }
+
+func JsonStringToMap(jsonString string) (map[string]interface{}, error) {
+	var data map[string]interface{}
+
+	// Use json.Unmarshal to parse the JSON string
+	err := json.Unmarshal([]byte(jsonString), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return data, err
+
+
+}
