@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "cde18cbd-bf34-422f-8127-39a43c94cd73",
+		"name": "scammer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8198248"
+	},
+	"item": [
+		{
+			"name": "MakeStkPush",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"targetNumber\": 254712345678,\n    \"requestID\": \"dcbbed07-62a6-45f0-b042-f5o1fc443415\",\n    \"pushAmount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pushstk ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pushstk "
+					]
+				},
+				"description": "Endpoint to initiate M-PESA stk push.\n\n| **Params** | **Description** | **Type** |\n| --- | --- | --- |\n| targetNumber | Number to request payment from | INT |\n| requestID | UUID to track the transaction. (It can be anything) | STRING |\n| pushAmount | Amount | INT |\n\nReturns are directly from Daraja API"
+			},
+			"response": [
+				{
+					"name": "MakeStkPush",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"targetNumber\": 254712345678,\n    \"requestID\": \"dcbbed07-62a6-45f0-b042-f5o1fc443415\",\n    \"pushAmount\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stkcallback/dcbbed07-62a6-45f0-b042-f5o1fc443415",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stkcallback",
+								"dcbbed07-62a6-45f0-b042-f5o1fc443415"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 02 Jan 2023 13:28:37 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "CheckTransactionStatus",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/transactionstatus/dcbbed07-62a6-45f0-b042-f5o1fc44341p",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactionstatus",
+						"dcbbed07-62a6-45f0-b042-f5o1fc44341p"
+					]
+				},
+				"description": "Endpoint to check transaction status.\n\n  \nhttp://localhost:8080/transactionstatus/:requestID"
+			},
+			"response": []
+		}
+	]
+}
