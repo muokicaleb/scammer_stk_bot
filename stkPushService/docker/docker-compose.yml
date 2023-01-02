@@ -1,0 +1,20 @@
+version: '3'
+services:
+  stkpushapp:
+    build: ./stkPushService
+    env_file:
+      - ./.env
+      - ./stkPushService/.env
+    ports:
+      - "8080:8080"
+
+  stkdb:
+    image: postgres:latest
+    env_file: ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      
+volumes:
+  postgres-data:
