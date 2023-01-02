@@ -44,6 +44,7 @@ func main() {
 	r.POST("/stkcallback/:param", func(c *gin.Context) {
 		// Extract the "param" path parameter from the request
 		param := c.Param("param")
+		fmt.Println(param)
 
 		var data map[string]interface{}
 
