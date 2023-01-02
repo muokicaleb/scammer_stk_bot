@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -55,6 +56,14 @@ func main() {
 		}
 		str := fmt.Sprintf("%+v", data)
 		fmt.Println(str)
+
+		b, err := json.Marshal(data)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		fmt.Println(string(b))
 
 	})
 	// Start the server
