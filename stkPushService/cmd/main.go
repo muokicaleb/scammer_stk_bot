@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/muokicaleb/scammer_stk_bot/stkPushService/pkg"
 )
 
 // STKPushRequest represents the data in the POST request for the /pushstk route
@@ -34,7 +36,7 @@ func main() {
 		// Call the bot function with the TargetNumber and RequestID from the request
 		pushResponse := bot(req.TargetNumber, req.RequestID, req.PushAmount)
 
-		AddResponseToStkDB(pushResponse, req.RequestID, req.PushAmount)
+		pkg.AddResponseToStkDB(pushResponse, req.RequestID, req.PushAmount)
 
 		// Return a message to the client indicating that the request has been processed
 		c.JSON(http.StatusOK, pushResponse)
@@ -61,13 +63,13 @@ func main() {
 			return
 		}
 
-		callbackBody, err := JsonStringToMap(string(responseData))
+		callbackBody, err := pkg.JsonStringToMap(string(responseData))
 
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		UpdateStkPushDB(callbackBody, param)
+		pkg.UpdateStkPushDB(callbackBody, param)
 		fmt.Println("Done callBackbody")
 
 	})
@@ -77,7 +79,7 @@ func main() {
 
 		// Return the value to the client
 		c.JSON(200, gin.H{
-			"status": GetTransactionStatus(param),
+			"status": pkg.GetTransactionStatus(param),
 		})
 
 	})
@@ -88,5 +90,5 @@ func main() {
 // bot is a function that handles STK push requests
 func bot(targetNumber int, requestID string, pushAmount int) map[string]interface{} {
 	// Get a Daraja Bearer token
-	return ScammerStkPush(BearerTokenGenerator(), targetNumber, requestID, pushAmount)
+	return pkg.ScammerStkPush(pkg.BearerTokenGenerator(), targetNumber, requestID, pushAmount)
 }
